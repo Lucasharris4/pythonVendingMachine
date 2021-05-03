@@ -1,21 +1,11 @@
+from VendingMachineError import InsufficientFundsError
 from dollar_amount import DollarAmount
-from enum import Enum
-
-
-class Message(Enum):
-    OUT_OF_STOCK = "Out of Stock"
-    INVALID_SELECTION = "Invalid Selection"
-    INSUFFICIENT_FUNDS = "Insufficient Funds"
 
 
 class VendingMachine(object):
-    menu = {'A1': {'name': 'lays', 'price': '3.75', 'stock': 0},
-            'B3': {'name': 'pepsi', 'price': '1.75', 'stock': 10},
-            'C4': {'name': 'payday', 'price': '.99', 'stock': 10},}
-
-
-    def __init__(self):
+    def __init__(self, menu):
         self.balance = DollarAmount()
+        self.menu = menu
 
     def insert_quarter(self):
         self.balance.add_money(25)
@@ -35,19 +25,16 @@ class VendingMachine(object):
         return change
 
     def print_menu(self):
-        return str(self.menu)
+        return str(self.menu.to_string())
 
     def make_selection(self, selection):
-        try:
-            menu_item = self.menu[selection]
-            return self.make_purchase(menu_item)
-        except KeyError:
-            return Message.INVALID_SELECTION
+        menu_item = self.menu.get_item_by_code(selection)
+        return self.make_purchase(menu_item)
 
     def make_purchase(self, menu_item):
         price = int(menu_item['price'].replace('.', ''))
+        self.check_for_sufficient_funds(price)
+
+    def check_for_sufficient_funds(self, price):
         if price > self.balance.amount:
-            return Message.INSUFFICIENT_FUNDS
-        if menu_item['stock'] == 0:
-            return Message.OUT_OF_STOCK
-        return Message.OUT_OF_STOCK
+            raise InsufficientFundsError

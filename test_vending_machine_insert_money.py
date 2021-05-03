@@ -1,11 +1,12 @@
 import unittest
 
 from vending_machine import VendingMachine
+from menu import MenuImp
 
 
 class TestInsertMoney(unittest.TestCase):
     def setUp(self):
-        self.vm = VendingMachine()
+        self.vm = VendingMachine(MenuImp())
 
     def test_no_change_if_no_money_inserted(self):
         self.assertEqual("0.00", self.vm.get_change())

@@ -1,11 +1,13 @@
 import unittest
 
-from vending_machine import VendingMachine, Message
+from VendingMachineError import PyVendingMachineError, Message
+from vending_machine import VendingMachine
+from menu import MenuImp
 
 
 class TestMenu(unittest.TestCase):
     def setUp(self):
-        self.vm = VendingMachine()
+        self.vm = VendingMachine(MenuImp())
         self.chips = {'name': 'lays', 'price': '3.75'},
         self.drink = {'name': 'pepsi', 'price': '1.75'},
         self.candy_bar = {'name': 'payday', 'price': '.99'},
@@ -15,17 +17,23 @@ class TestMenu(unittest.TestCase):
             'C4': {'name': 'payday', 'price': '.99', 'stock': 10},}
 
     def test_print_menu(self):
-        self.assertEqual(self.vm.print_menu(), str(self.menu))
+        self.assertEqual(str(self.menu), self.vm.print_menu())
 
     def test_invalid_selection(self):
-        self.assertEqual(Message.INVALID_SELECTION, self.vm.make_selection("XX"))
+        with self.assertRaises(PyVendingMachineError) as context:
+            self.vm.make_selection("XX")
+        self.assertEqual(context.exception.message, Message.INVALID_SELECTION)
 
     def test_insufficient_funds(self):
-        self.assertEqual(Message.INSUFFICIENT_FUNDS, self.vm.make_selection("B3"))
+        with self.assertRaises(PyVendingMachineError) as context:
+            self.vm.make_selection("B3")
+        self.assertEqual(context.exception.message, Message.INSUFFICIENT_FUNDS)
 
     def test_out_of_stock(self):
-        self.vm.insert_five()
-        self.assertEqual(Message.OUT_OF_STOCK, self.vm.make_selection("A1"))
+        with self.assertRaises(PyVendingMachineError) as context:
+            self.vm.insert_five()
+            self.vm.make_selection("A1")
+        self.assertEqual(context.exception.message, Message.OUT_OF_STOCK)
 
 
 if __name__ == '__main__':
