@@ -1,4 +1,4 @@
-from VendingMachineError import InvalidSelectionError, OutOfStockError
+from vending_machine_error import InvalidSelectionError, OutOfStockError
 
 
 class MenuInterface(object):

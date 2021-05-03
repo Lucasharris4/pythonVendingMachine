@@ -1,4 +1,4 @@
-from VendingMachineError import InsufficientFundsError
+from vending_machine_error import InsufficientFundsError
 from dollar_amount import DollarAmount
 
 
