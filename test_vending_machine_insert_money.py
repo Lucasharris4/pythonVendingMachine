@@ -7,7 +7,7 @@ from menu import MenuImp
 
 class TestInsertMoney(unittest.TestCase):
     def setUp(self):
-        self.vm = VendingMachine(MenuImp())
+        self.vm = VendingMachine(MenuImp(items))
 
     def test_no_change_if_no_money_inserted(self):
         self.assertEqual(zero_balance, self.vm.get_change())

@@ -8,7 +8,7 @@ from menu import MenuImp
 
 class TestMenu(unittest.TestCase):
     def setUp(self):
-        self.vm = VendingMachine(MenuImp())
+        self.vm = VendingMachine(MenuImp(items))
         self.menu = test_menu
 
     def test_print_menu(self):

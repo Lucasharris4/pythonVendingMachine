@@ -28,13 +28,13 @@ class VendingMachine(object):
         return str(self.menu.to_string())
 
     def make_selection(self, selection):
-        menu_item = self.menu.get_item_by_code(selection)
-        return self.make_purchase(menu_item)
+        return self.make_purchase(self.menu.get_item_by_code(selection))
 
     def make_purchase(self, menu_item):
-        price = int(menu_item['price'].replace('.', ''))
+        price = int(menu_item.info['price'].replace('.', ''))
         self.check_for_sufficient_funds(price)
 
     def check_for_sufficient_funds(self, price):
-        if price > self.balance.amount:
-            raise InsufficientFundsError
+        if price <= self.balance.amount:
+            return self.balance.add_money(price * -1)
+        raise InsufficientFundsError
