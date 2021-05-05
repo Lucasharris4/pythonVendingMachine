@@ -1,8 +1,8 @@
 import unittest
 
 from testing_constants_vm import *
-from vending_machine import VendingMachine
-from menu import MenuImp
+from vending_machine.vending_machine import VendingMachine
+from menu.menu import MenuImp
 
 
 class TestInsertMoney(unittest.TestCase):

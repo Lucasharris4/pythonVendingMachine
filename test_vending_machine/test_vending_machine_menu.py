@@ -1,9 +1,9 @@
 import unittest
 
 from testing_constants_vm import *
-from vending_machine_error import PyVendingMachineError, Message
-from vending_machine import VendingMachine
-from menu import MenuImp
+from vending_machine.vending_machine_error import PyVendingMachineError, Message
+from vending_machine.vending_machine import VendingMachine
+from menu.menu import MenuImp
 
 
 class TestMenu(unittest.TestCase):
@@ -12,7 +12,10 @@ class TestMenu(unittest.TestCase):
         self.menu = test_menu
 
     def test_print_menu(self):
-        self.assertEqual(str(self.menu), self.vm.print_menu())
+        expected = "A1: lays $3.75 Out of Stock\n" + \
+                   "B3: pepsi $1.75\n" + \
+                   "C4: payday $0.99\n"
+        self.assertEqual(expected, self.vm.print_menu())
 
     def test_invalid_selection(self):
         with self.assertRaises(PyVendingMachineError) as context:

@@ -31,10 +31,8 @@ class VendingMachine(object):
         return self.make_purchase(self.menu.get_item_by_code(selection))
 
     def make_purchase(self, menu_item):
-        price = int(menu_item.info['price'].replace('.', ''))
-        self.check_for_sufficient_funds(price)
-
-    def check_for_sufficient_funds(self, price):
-        if price <= self.balance.amount:
-            return self.balance.add_money(price * -1)
-        raise InsufficientFundsError
+        try:
+            self.balance.subtract_money(menu_item.get_price_in_pennies())
+        except InsufficientFundsError:
+            menu_item.put_item_back()
+            raise InsufficientFundsError
