@@ -1,7 +1,7 @@
 import unittest
 
 from testing_constants_vm import *
-from vending_machine.vending_machine_error import PyVendingMachineError, Message
+from vending_machine_error.vending_machine_error import PyVendingMachineError, Message
 from vending_machine.vending_machine import VendingMachine
 from menu.menu import MenuImp
 

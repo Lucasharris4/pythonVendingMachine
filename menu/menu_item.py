@@ -1,4 +1,4 @@
-from vending_machine.vending_machine_error import OutOfStockError, InvalidSelectionError, Message
+from vending_machine_error.vending_machine_error import OutOfStockError, InvalidSelectionError, Message
 
 
 class MenuItem(object):

@@ -1,4 +1,4 @@
-from vending_machine.vending_machine_error import InsufficientFundsError
+from vending_machine_error.vending_machine_error import InsufficientFundsError
 
 
 class DollarAmount(object):

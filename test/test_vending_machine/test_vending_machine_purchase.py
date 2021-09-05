@@ -4,7 +4,7 @@ from balance_sheet.balance_sheet import BalanceSheet
 from menu.menu import MenuImp
 from testing_constants_vm import *
 from vending_machine.vending_machine import VendingMachine
-from vending_machine.vending_machine_error import PyVendingMachineError
+from vending_machine_error.vending_machine_error import PyVendingMachineError
 
 
 class TestPurchase(unittest.TestCase):
