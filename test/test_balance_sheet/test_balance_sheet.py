@@ -3,7 +3,7 @@ import unittest
 from balance_sheet.balance_sheet import BalanceSheet
 from balance_sheet.transaction import Sale, Credit, Debit
 from dollar_amount import DollarAmount
-from testing_constants_vm import pepsi, lays, payday
+from testing_constants_vm import pepsi, lays, payday, test_balance_sheet
 
 
 class TestPurchase(unittest.TestCase):
@@ -54,4 +54,12 @@ class TestPurchase(unittest.TestCase):
         expected_amount = DollarAmount()
         expected_amount.add_money(300)
         self.assertEqual(self.balance_sheet.get_balance(), expected_amount.get_amount())
+
+    def test_can_import_balance_sheet_from_json(self):
+        self.balance_sheet = BalanceSheet(revenue=100000, balance=500)
+        self.assertEqual(self.balance_sheet.revenue, 100000)
+        self.assertEqual(self.balance_sheet.balance, 500)
+        # self.assertEqual(self.sales, [])
+        # self.assertEqual(self.credits, [])
+        # self.assertEqual(self.debits, [])
 

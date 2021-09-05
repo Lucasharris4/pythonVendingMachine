@@ -2,9 +2,9 @@ from dollar_amount import DollarAmount
 
 
 class BalanceSheet(object):
-    def __init__(self):
-        self.revenue = DollarAmount()
-        self.balance = DollarAmount()
+    def __init__(self, **kwargs):
+        self.revenue = kwargs.get('revenue', DollarAmount())
+        self.balance = kwargs.get('balance', DollarAmount())
         self.sales = {}
         self.credits = []
         self.debits = []

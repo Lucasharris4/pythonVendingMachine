@@ -35,3 +35,8 @@ payday = MenuItem() \
 
 
 items = ItemList(lays, pepsi, payday)
+
+test_balance_sheet = {
+    "revenue": 10000,
+    "balance": 500,
+}

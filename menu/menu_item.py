@@ -35,7 +35,7 @@ class MenuItem(object):
 
     def in_or_out_of_stock(self):
         if self.info['stock'] == 0:
-            return " " + Message.OUT_OF_STOCK
+            return " " + "Out of Stock"
         return ""
 
 

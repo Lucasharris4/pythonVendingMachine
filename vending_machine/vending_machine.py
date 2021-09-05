@@ -9,7 +9,7 @@ class VendingMachineI(object):
         raise NotImplementedError
 
 
-class VendingMachine:
+class VendingMachine(VendingMachineI):
     def __init__(self, menu, **kwargs):
         self.balance = DollarAmount()
         self.menu = menu
