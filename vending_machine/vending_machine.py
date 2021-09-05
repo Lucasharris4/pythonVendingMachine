@@ -1,8 +1,12 @@
 from balance_sheet.balance_sheet import BalanceSheet
 from balance_sheet.transaction import Sale, Credit
-from menu.menu import MenuImp
-from vending_machine_error import InsufficientFundsError
 from dollar_amount import DollarAmount
+from vending_machine_error.vending_machine_error import InsufficientFundsError
+
+
+class VendingMachineI(object):
+    def print_menu(self, code):
+        raise NotImplementedError
 
 
 class VendingMachine:
